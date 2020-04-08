@@ -4,6 +4,8 @@ Ce répertoire contient le projet en cours de développement par Adrien Rulfo et
 
 ## Présentation du projet
 
-L'objectif du projet est le codage d'un jeu avec interface graphique, en l'occurence ici un 2048, dont quelques options pourront être ajoutées.
+L'objectif du projet est le codage d'un jeu avec interface graphique, en l'occurrence ici un 2048, dont quelques options pourront être ajoutées.
 
 ## Installation du jeu
+
+À venir
