@@ -503,6 +503,7 @@ QString grid::colorChoice(QString a, int b)
         else if(a=="131072") return("#0374b4");
         else return("#cdc1b4");
         }
+    else return("#cdc1b4");
 }
 
 int grid::getColor()
@@ -513,13 +514,9 @@ int grid::getColor()
 void grid::setColor(int a)
 {
     color = a;
+    colorUpdated();
 }
 
-void grid::changeColor(int a)
-{
-    for (int i=0; i<=15; i++) colorChoice(QString::number(tab[i]),a);
-    setColor(a);
-}
 
 bool grid::testBlocked(int x, int y)
 {
