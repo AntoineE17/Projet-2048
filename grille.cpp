@@ -148,10 +148,10 @@ void grid::resetRecord()
 //Gestion des commandes
 void grid::moveUp()
 {
+    setBack();
     slideUp();
     mergeUp();
     slideUp();
-    setBack();
     if(updated)
     {
         generateNewTile();
@@ -159,7 +159,7 @@ void grid::moveUp()
         recordUpdated();
     }
     tabUpdated();
-    setBack();
+
     updated = false;
 }
 
@@ -213,6 +213,7 @@ void grid::mergeUp()
 
 void grid::moveDown()
 {
+    setBack();
     slideDown();
     mergeDown();
     slideDown();
@@ -223,7 +224,7 @@ void grid::moveDown()
         recordUpdated();
     }
     tabUpdated();
-    setBack();
+
     updated = false;
 }
 
@@ -277,10 +278,10 @@ void grid::mergeDown()
 
 void grid::moveLeft()
 {
+    setBack();
     slideLeft();
     mergeLeft();
     slideLeft();
-    setBack();
     if(updated)
     {
         generateNewTile();
@@ -288,7 +289,6 @@ void grid::moveLeft()
         recordUpdated();
     }
     tabUpdated();
-    setBack();
     updated = false;
 }
 
@@ -342,11 +342,10 @@ void grid::mergeLeft()
 
 void grid::moveRight()
 {
+    setBack();
     slideRight();
     mergeRight();
     slideRight();
-    tabUpdated();
-    setBack();
     if(updated)
     {
         generateNewTile();
@@ -354,7 +353,6 @@ void grid::moveRight()
         recordUpdated();
     }
     tabUpdated();
-    setBack();
     updated = false;
 }
 

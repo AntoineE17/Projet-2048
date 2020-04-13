@@ -852,11 +852,12 @@ Window {
         Text {
             id: text46
             x: 0
-            y: 110
+            y: 123
             width: 310
             height: 64
-            color: "#4e4a46"
+            color: "#000000"
             text: "Game Over"
+            verticalAlignment: Text.AlignVCenter
             horizontalAlignment: Text.AlignHCenter
             font.pixelSize: 50
             font.bold: true
@@ -1068,6 +1069,6 @@ D{i:11;invisible:true}D{i:13;invisible:true}D{i:15;invisible:true}D{i:17;invisib
 D{i:19;invisible:true}D{i:21;invisible:true}D{i:23;invisible:true}D{i:25;invisible:true}
 D{i:27;invisible:true}D{i:29;invisible:true}D{i:31;invisible:true}D{i:33;invisible:true}
 D{i:35;invisible:true}D{i:39;invisible:true}D{i:37;invisible:true}D{i:1;invisible:true}
-D{i:53;invisible:true}D{i:51;invisible:true}
+D{i:51;invisible:true}D{i:53;invisible:true}
 }
 ##^##*/
