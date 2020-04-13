@@ -4,6 +4,9 @@
  */
 
 #include "grille.h"
+#include "cmath"
+#include "ctime"
+#include "cstdlib"
 using namespace std;
 // #include <iostream>
 
@@ -24,16 +27,60 @@ void grid::setTab(int pos, int val)
 
 void grid::resetTab()
 {
-    for(int i=0;i<=15;i++)
+    for(int k=0; k<=15; k++)
     {
-        setTab(i, 0);
+        setTab(k, 0);
     }
 }
 
 void grid::resetGame()
 {
     resetTab();
+    generateNewTile();
+    generateNewTile();
     resetScore();
+}
+
+// Generation d'une nouvelle tuile
+void grid::generateNewTile()
+{
+    int countFree=0;
+    for(int k=0; k<=15; k++)
+    {
+        if(tab[k]==0)
+        {
+            countFree++;
+        }
+    }
+    if(countFree >0)
+    {
+         // whereToAdd indique la position de la tuile à générer
+        int whereToAdd = generateRandom(countFree);
+
+        // On génère une tuile de valeur 4 avec une probabilité de 0.2 et de valeur 2 avec une probabilité de 0.8
+        int whatToAdd;
+        int rd = generateRandom(5);
+        if(rd==0) whatToAdd=4;
+        else whatToAdd=2;
+
+        // On a un numéro de tuile libre, reste à la trouver parmi toutes les tuiles
+        countFree = -1; // whereToAdd est un indice entre 0 et countFree-1
+        for(int k=0; k<=15; k++)
+        {
+            if(tab[k]==0)
+            {
+                countFree++;
+                if(countFree==whereToAdd) tab[whereToAdd]=whatToAdd;
+            }
+        }
+    }
+    testGameOver();
+}
+
+int grid::generateRandom(int n)
+{
+    srand(time(NULL));
+    return rand()%n;
 }
 
 // Gestion du score
@@ -75,6 +122,7 @@ void grid::moveUp()
     slideUp();
     mergeUp();
     slideUp();
+    generateNewTile();
 }
 
 void grid::slideUp()
@@ -128,6 +176,7 @@ void grid::moveDown()
     slideDown();
     mergeDown();
     slideDown();
+    generateNewTile();
 }
 
 void grid::slideDown()
@@ -181,6 +230,7 @@ void grid::moveLeft()
     slideLeft();
     mergeLeft();
     slideLeft();
+    generateNewTile();
 }
 
 void grid::slideLeft()
@@ -234,6 +284,7 @@ void grid::moveRight()
     slideRight();
     mergeRight();
     slideRight();
+    generateNewTile();
 }
 
 void grid::slideRight()
@@ -285,78 +336,24 @@ void grid::mergeRight()
 // Gestion des couleurs
 QString grid::colorChoice(QString a)
 {
-    if(a=="2")
-    {
-        return("#e6d8d3");
-    }
-    else if(a=="4")
-    {
-        return("#f0deca");
-    }
-    else if(a=="8")
-    {
-        return("#f2b179");
-    }
-    else if(a=="16")
-    {
-        return("#f79266");
-    }
-    else if(a=="32")
-    {
-        return("#f97a62");
-    }
-    else if(a=="64")
-    {
-        return("#fa5c3f");
-    }
-    else if(a=="128")
-    {
-        return("#f55c3f");
-    }
-    else if(a=="256")
-    {
-        return("#efca64");
-    }
-    else if(a=="512")
-    {
-        return("#e3bb51");
-    }
-    else if(a=="1024")
-    {
-        return("#e4b93f");
-    }
-    else if(a=="2048")
-    {
-        return("#eec032");
-    }
-    else if(a=="4096")
-    {
-        return("#f1646e");
-    }
-    else if(a=="8192")
-    {
-        return("#ef4c5c");
-    }
-    else if(a=="16384")
-    {
-        return("#e34239");
-    }
-    else if(a=="32768")
-    {
-        return("#72b2d6");
-    }
-    else if(a=="65536")
-    {
-        return("#5f9ee2");
-    }
-    else if(a=="131072")
-    {
-        return("#0374b4");
-    }
-    else
-    {
-        return("#cdc1b4");
-    }
+    if(a=="2") return("#e6d8d3");
+    else if(a=="4") return("#f0deca");
+    else if(a=="8") return("#f2b179");
+    else if(a=="16") return("#f79266");
+    else if(a=="32") return("#f97a62");
+    else if(a=="64") return("#fa5c3f");
+    else if(a=="128") return("#f55c3f");
+    else if(a=="256") return("#efca64");
+    else if(a=="512") return("#e3bb51");
+    else if(a=="1024") return("#e4b93f");
+    else if(a=="2048") return("#eec032");
+    else if(a=="4096") return("#f1646e");
+    else if(a=="8192") return("#ef4c5c");
+    else if(a=="16384") return("#e34239");
+    else if(a=="32768") return("#72b2d6");
+    else if(a=="65536") return("#5f9ee2");
+    else if(a=="131072") return("#0374b4");
+    else return("#cdc1b4");
 }
 
 bool grid::testBlocked(int x, int y)
