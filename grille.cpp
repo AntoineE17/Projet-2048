@@ -59,12 +59,16 @@ QList<QString> grid::getBack()
     QList<QString> backValuesStr;
     for(int k=0; k<=15; k++)
     {
-        if(tab[k]!=0) backValuesStr.append(QString::number(tab[k]));
+        if(tab[k]!=0) backValuesStr.append(QString::number(back[k]));
         else if(tab[k]==0) backValuesStr.append(QString::fromStdString(" "));
     }
     return backValuesStr;
 }
-
+void grid::loadBack()
+{
+    tab = back;
+    tabUpdated();
+}
 void grid::resetGame()
 {
     updated = true;
@@ -427,23 +431,18 @@ QString grid::colorChoice(QString a, int b)
     }
     else if(b==1)
     {
-        if(a=="2") return("#e6d8d3");
-        else if(a=="4") return("#f0deca");
-        else if(a=="8") return("#f2b179");
-        else if(a=="16") return("#f79266");
-        else if(a=="32") return("#f97a62");
-        else if(a=="64") return("#fa5c3f");
-        else if(a=="128") return("#f55c3f");
-        else if(a=="256") return("#efca64");
-        else if(a=="512") return("#e3bb51");
-        else if(a=="1024") return("#e4b93f");
-        else if(a=="2048") return("#eec032");
-        else if(a=="4096") return("#f1646e");
-        else if(a=="8192") return("#ef4c5c");
-        else if(a=="16384") return("#e34239");
-        else if(a=="32768") return("#72b2d6");
-        else if(a=="65536") return("#5f9ee2");
-        else if(a=="131072") return("#0374b4");
+        if(a=="2") return("#CD5C5C");
+        else if(a=="4") return("#F08080");
+        else if(a=="8") return("#FA8072");
+        else if(a=="16") return("#E9967A");
+        else if(a=="32") return("#FFA07A");
+        else if(a=="64") return("#BB0B0B");
+        else if(a=="128") return("#E73E01");
+        else if(a=="256") return("#FF00FF");
+        else if(a=="512") return("#91283B");
+        else if(a=="1024") return("#FF5E4D");
+        else if(a=="2048") return("#FF0000");
+        else if(a=="4096") return("#E0115F");
         else return("#cdc1b4");
     }
     else if(b==2)
@@ -542,6 +541,7 @@ void grid::setColor(int a)
 {
     color = a;
     colorUpdated();
+    tabUpdated();
 }
 
 bool grid::testBlocked(int x, int y)
@@ -582,6 +582,7 @@ void grid::testGameOver()
         }
     }
     gameOver = tempGameOver;
+    gameOverUpdated();
 }
 
 bool grid::getGameOver()
