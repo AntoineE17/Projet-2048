@@ -33,6 +33,17 @@ void grid::resetTab()
     }
 }
 
+QList<QString> grid::getTab()
+{
+    QList<QString> tabValuesStr;
+    for(int k=0; k<=15; k++)
+    {
+        if(tab[k]!=0) tabValuesStr.append(QString::number(tab[k]));
+        else if(tab[k]==0) tabValuesStr.append(QString::fromStdString(" "));
+    }
+    return tabValuesStr;
+}
+
 void grid::resetGame()
 {
     resetTab();
