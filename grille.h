@@ -19,6 +19,7 @@ public:
 
     void setBack();
     Q_INVOKABLE QList<QString> getBack();
+    Q_INVOKABLE void loadBack();
     Q_INVOKABLE void resetGame();
     void generateNewTile();
     int generateRandom(int n);

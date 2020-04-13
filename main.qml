@@ -9,101 +9,6 @@ Window {
     color: "#faf8ef"
     title: qsTr("FenetreJeu")
 
-    Rectangle {
-        id: fond1
-        x: 55
-        y: 36
-        width: 310
-        height: 310
-        color: "#bbada1"
-        radius: 3
-        border.width: 0
-        opacity: (grilleQML.gameOverQML) ? 0.7 : 0
-
-        Text {
-            id: text46
-            x: 8
-            y: 110
-            width: 302
-            height: 64
-            color: "#4e4a46"
-            text: "Game Over"
-            horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 50
-            font.bold: true
-            font.family: "Helvetica"
-        }
-
-        Rectangle {
-            id: newpartie1
-            x: 63
-            y: 37
-            width: 85
-            height: 35
-            color: "#8e7a66"
-            radius: 3
-            border.width: 0
-            MouseArea {
-                id: mouseArea1
-                x: 0
-                y: 0
-                width: 85
-                height: 35
-                anchors.top: parent.top
-                anchors.topMargin: 0
-                acceptedButtons: Qt.LeftButton
-                onClicked: {
-                    grilleQML.resetGame()
-                }
-            }
-
-            Text {
-                id: text24
-                x: 142
-                y: 78
-                width: 85
-                height: 35
-                text: "Nouvelle"
-                font.weight: Font.Black
-                font.pixelSize: 12
-                anchors.verticalCenter: parent.verticalCenter
-                focus: true
-                horizontalAlignment: Text.AlignHCenter
-                anchors.verticalCenterOffset: -7
-                verticalAlignment: Text.AlignVCenter
-                font.family: "Verdana"
-                anchors.horizontalCenterOffset: 0
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-
-            Text {
-                id: text25
-                x: 132
-                y: 69
-                width: 85
-                height: 35
-                text: "partie"
-                font.weight: Font.Black
-                font.pixelSize: 12
-                anchors.verticalCenter: parent.verticalCenter
-                focus: true
-                horizontalAlignment: Text.AlignHCenter
-                font.family: "Verdana"
-                verticalAlignment: Text.AlignVCenter
-                anchors.verticalCenterOffset: 7
-                anchors.horizontalCenterOffset: 0
-                anchors.horizontalCenter: parent.horizontalCenter
-            }
-            anchors.verticalCenter: parent.verticalCenter
-            anchors.verticalCenterOffset: 25
-            anchors.horizontalCenterOffset: 5
-            anchors.horizontalCenter: parent.horizontalCenter
-        }
-        anchors.verticalCenter: parent.verticalCenter
-        anchors.verticalCenterOffset: 25
-        anchors.horizontalCenterOffset: 0
-        anchors.horizontalCenter: parent.horizontalCenter
-    }
 
     Rectangle {
         id: fond
@@ -141,7 +46,7 @@ Window {
             y: 20
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[0])
+            color: grilleQML.colorChoice(grilleQML.tabQML[0],grilleQML.getColor())
             radius: 3
             border.width: 0
             anchors.verticalCenterOffset: -114
@@ -178,7 +83,7 @@ Window {
             y: 24
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[1])
+            color: grilleQML.colorChoice(grilleQML.tabQML[1],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: -38
             anchors.verticalCenterOffset: -114
@@ -212,7 +117,7 @@ Window {
             y: 16
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[2])
+            color: grilleQML.colorChoice(grilleQML.tabQML[2],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: 38
             anchors.verticalCenterOffset: -114
@@ -246,7 +151,7 @@ Window {
             y: 17
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[3])
+            color: grilleQML.colorChoice(grilleQML.tabQML[3],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: 114
             anchors.verticalCenterOffset: -114
@@ -280,7 +185,7 @@ Window {
             y: 21
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[4])
+            color: grilleQML.colorChoice(grilleQML.tabQML[4],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: -114
             anchors.verticalCenterOffset: -38
@@ -314,7 +219,7 @@ Window {
             y: 25
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[5])
+            color: grilleQML.colorChoice(grilleQML.tabQML[5],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: -39
             anchors.verticalCenterOffset: -38
@@ -348,7 +253,7 @@ Window {
             y: 17
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[6])
+            color: grilleQML.colorChoice(grilleQML.tabQML[6],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: 38
             anchors.verticalCenterOffset: -38
@@ -382,7 +287,7 @@ Window {
             y: 18
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[7])
+            color: grilleQML.colorChoice(grilleQML.tabQML[7],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: 114
             anchors.verticalCenterOffset: -38
@@ -416,7 +321,7 @@ Window {
             y: 21
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[8])
+            color: grilleQML.colorChoice(grilleQML.tabQML[8],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: -114
             anchors.verticalCenterOffset: 38
@@ -450,7 +355,7 @@ Window {
             y: 25
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[9])
+            color: grilleQML.colorChoice(grilleQML.tabQML[9],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: -38
             anchors.verticalCenterOffset: 39
@@ -484,7 +389,7 @@ Window {
             y: 17
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[10])
+            color: grilleQML.colorChoice(grilleQML.tabQML[10],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: 38
             anchors.verticalCenterOffset: 39
@@ -518,7 +423,7 @@ Window {
             y: 18
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[11])
+            color: grilleQML.colorChoice(grilleQML.tabQML[11],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: 114
             anchors.verticalCenterOffset: 39
@@ -552,7 +457,7 @@ Window {
             y: 28
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[12])
+            color: grilleQML.colorChoice(grilleQML.tabQML[12],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: -114
             anchors.verticalCenterOffset: 114
@@ -586,7 +491,7 @@ Window {
             y: 32
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[13])
+            color: grilleQML.colorChoice(grilleQML.tabQML[13],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: -38
             anchors.verticalCenterOffset: 115
@@ -620,7 +525,7 @@ Window {
             y: 24
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[14])
+            color: grilleQML.colorChoice(grilleQML.tabQML[14],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: 38
             anchors.verticalCenterOffset: 115
@@ -654,7 +559,7 @@ Window {
             y: 25
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.tabQML[15])
+            color: grilleQML.colorChoice(grilleQML.tabQML[15],grilleQML.getColor())
             radius: 3
             anchors.horizontalCenterOffset: 114
             anchors.verticalCenterOffset: 115
@@ -884,6 +789,84 @@ Window {
             font.bold: true
             font.family: "Helvetica"
         }
+
+        Rectangle {
+            id: newpartie2
+            x: 71
+            y: 46
+            width: 85
+            height: 35
+            color: "#8e7a66"
+            radius: 3
+            border.width: 0
+            MouseArea {
+                id: mouseArea8
+                x: 0
+                y: 0
+                width: 85
+                height: 35
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                acceptedButtons: Qt.LeftButton
+                onClicked: {
+                    grilleQML.loadBack()
+                }
+            }
+
+            Text {
+                id: text28
+                x: 142
+                y: 78
+                width: 85
+                height: 65
+                text: "Précédent"
+                font.weight: Font.Black
+                font.pixelSize: 12
+                anchors.verticalCenter: parent.verticalCenter
+                focus: true
+                horizontalAlignment: Text.AlignHCenter
+                anchors.verticalCenterOffset: 0
+                verticalAlignment: Text.AlignVCenter
+                font.family: "Verdana"
+                anchors.horizontalCenterOffset: 0
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.verticalCenterOffset: -192
+            anchors.horizontalCenterOffset: -31
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+    }
+
+    Rectangle {
+        id: fond1
+        x: 55
+        y: 36
+        width: 310
+        height: 310
+        color: "#bbada1"
+        radius: 3
+        border.width: 0
+        opacity: (grilleQML.gameOverQML) ? 0.7 : 0
+
+        Text {
+            id: text46
+            x: 0
+            y: 123
+            width: 310
+            height: 64
+            color: "#000000"
+            text: "Game Over"
+            verticalAlignment: Text.AlignVCenter
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 50
+            font.bold: true
+            font.family: "Helvetica"
+        }
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: 25
+        anchors.horizontalCenterOffset: 0
+        anchors.horizontalCenter: parent.horizontalCenter
     }
 
     Rectangle {
@@ -911,7 +894,7 @@ Window {
 
             acceptedButtons: Qt.LeftButton
             onClicked: {
-                grilleQML.changeColor(1)
+                grilleQML.setColor(1)
             }
     }}
 
@@ -940,7 +923,7 @@ Window {
 
             acceptedButtons: Qt.LeftButton
             onClicked: {
-                grilleQML.changeColor(2)
+                grilleQML.setColor(2)
             }
     }}
 
@@ -969,7 +952,7 @@ Window {
 
             acceptedButtons: Qt.LeftButton
             onClicked: {
-                grilleQML.changeColor(3)
+                grilleQML.setColor(3)
             }
     }}
 
@@ -998,7 +981,7 @@ Window {
 
             acceptedButtons: Qt.LeftButton
             onClicked: {
-                grilleQML.changeColor(4)
+                grilleQML.setColor(4)
             }
     }}
 
@@ -1027,7 +1010,7 @@ Window {
 
             acceptedButtons: Qt.LeftButton
             onClicked: {
-                grilleQML.changeColor(5)
+                grilleQML.setColor(5)
             }
     }}
 
@@ -1056,7 +1039,7 @@ Window {
 
             acceptedButtons: Qt.LeftButton
             onClicked: {
-                grilleQML.changeColor(0)
+                grilleQML.setColor(0)
             }}
 
         Text {
@@ -1085,6 +1068,7 @@ Designer {
 D{i:11;invisible:true}D{i:13;invisible:true}D{i:15;invisible:true}D{i:17;invisible:true}
 D{i:19;invisible:true}D{i:21;invisible:true}D{i:23;invisible:true}D{i:25;invisible:true}
 D{i:27;invisible:true}D{i:29;invisible:true}D{i:31;invisible:true}D{i:33;invisible:true}
-D{i:35;invisible:true}D{i:39;invisible:true}D{i:37;invisible:true}
+D{i:35;invisible:true}D{i:39;invisible:true}D{i:37;invisible:true}D{i:1;invisible:true}
+D{i:51;invisible:true}D{i:53;invisible:true}
 }
 ##^##*/
