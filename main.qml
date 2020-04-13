@@ -613,7 +613,7 @@ Window {
                 y: -15
                 width: 70
                 height: 70
-                text: grilleQML.bestscoreQML
+                text: grilleQML.bestScoreQML
                 anchors.horizontalCenterOffset: 0
                 font.weight: Font.Black
                 horizontalAlignment: Text.AlignHCenter
@@ -724,7 +724,7 @@ Window {
 
                 acceptedButtons: Qt.LeftButton
                 onClicked: {
-                    grilleQML.resetgrille()
+                    grilleQML.resetGame()
                 }
 
             }
