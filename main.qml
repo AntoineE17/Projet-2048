@@ -764,7 +764,7 @@ Window {
         }
 
         Text {
-            id: text20
+            id: titre
             x: 6
             y: -117
             width: 82
@@ -777,7 +777,7 @@ Window {
         }
 
         Text {
-            id: text26
+            id: couleur
             x: -5
             y: 319
             width: 320
@@ -790,12 +790,13 @@ Window {
             font.family: "Helvetica"
         }
 
+
         Rectangle {
-            id: newpartie2
+            id: retour
             x: 71
             y: 46
-            width: 85
-            height: 35
+            width: 45
+            height: 45
             color: "#8e7a66"
             radius: 3
             border.width: 0
@@ -803,8 +804,8 @@ Window {
                 id: mouseArea8
                 x: 0
                 y: 0
-                width: 85
-                height: 35
+                width: 45
+                height: 45
                 anchors.top: parent.top
                 anchors.topMargin: 0
                 acceptedButtons: Qt.LeftButton
@@ -813,33 +814,25 @@ Window {
                 }
             }
 
-            Text {
-                id: text28
-                x: 142
-                y: 78
-                width: 85
-                height: 65
-                text: "Précédent"
-                font.weight: Font.Black
-                font.pixelSize: 12
-                anchors.verticalCenter: parent.verticalCenter
-                focus: true
-                horizontalAlignment: Text.AlignHCenter
-                anchors.verticalCenterOffset: 0
-                verticalAlignment: Text.AlignVCenter
-                font.family: "Verdana"
-                anchors.horizontalCenterOffset: 0
-                anchors.horizontalCenter: parent.horizontalCenter
+            Image {
+                id: image
+                x: 0
+                y: 0
+                width: 45
+                height: 45
+                rotation: 0
+                fillMode: Image.PreserveAspectFit
+                source: "60577.png"
             }
             anchors.verticalCenter: parent.verticalCenter
-            anchors.verticalCenterOffset: -192
-            anchors.horizontalCenterOffset: -31
+            anchors.verticalCenterOffset: -195
+            anchors.horizontalCenterOffset: -107
             anchors.horizontalCenter: parent.horizontalCenter
         }
     }
 
     Rectangle {
-        id: fond1
+        id: gameover
         x: 55
         y: 36
         width: 310
@@ -849,19 +842,14 @@ Window {
         border.width: 0
         opacity: (grilleQML.gameOverQML) ? 0.7 : 0
 
-        Text {
-            id: text46
+        Image {
+            id: image1
             x: 0
-            y: 123
+            y: 0
             width: 310
-            height: 64
-            color: "#000000"
-            text: "Game Over"
-            verticalAlignment: Text.AlignVCenter
-            horizontalAlignment: Text.AlignHCenter
-            font.pixelSize: 50
-            font.bold: true
-            font.family: "Helvetica"
+            height: 310
+            fillMode: Image.PreserveAspectFit
+            source: "77346959-carré-grunge-rouge-défaite-cachet-removebg-preview.png"
         }
         anchors.verticalCenter: parent.verticalCenter
         anchors.verticalCenterOffset: 25
@@ -870,7 +858,7 @@ Window {
     }
 
     Rectangle {
-        id: rectangle17
+        id: rouge
         x: 46
         y: 20
         width: 30
@@ -896,10 +884,10 @@ Window {
             onClicked: {
                 grilleQML.setColor(1)
             }
-    }}
+        }}
 
     Rectangle {
-        id: rectangle18
+        id: vert
         x: 46
         y: 17
         width: 30
@@ -925,10 +913,10 @@ Window {
             onClicked: {
                 grilleQML.setColor(2)
             }
-    }}
+        }}
 
     Rectangle {
-        id: rectangle19
+        id: jaune
         x: 41
         y: 24
         width: 30
@@ -954,10 +942,10 @@ Window {
             onClicked: {
                 grilleQML.setColor(3)
             }
-    }}
+        }}
 
     Rectangle {
-        id: rectangle20
+        id: bleu
         x: 37
         y: 21
         width: 30
@@ -983,10 +971,10 @@ Window {
             onClicked: {
                 grilleQML.setColor(4)
             }
-    }}
+        }}
 
     Rectangle {
-        id: rectangle21
+        id: rose
         x: 47
         y: 26
         width: 30
@@ -1012,10 +1000,10 @@ Window {
             onClicked: {
                 grilleQML.setColor(5)
             }
-    }}
+        }}
 
     Rectangle {
-        id: rectangle22
+        id: reset
         x: 48
         y: 26
         width: 66
