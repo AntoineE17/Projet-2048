@@ -1,8 +1,12 @@
 #ifndef GRILLE_H
 #define GRILLE_H
-
+#include <QList>
 #include <QObject>
-#include <Qlist>
+#include <cmath>
+#include <cstdlib>
+#include <ctime>
+#include <QString>
+using namespace std;
 
 class grid : public QObject
 {
@@ -23,8 +27,22 @@ public:
     void moveRight();
     void slideRight();
     void mergeRight();
+
+/*
+    Q_INVOKABLE void boutonhaut();
+    Q_INVOKABLE void boutonbas();
+    Q_INVOKABLE void boutongauche();
+    Q_INVOKABLE void boutondroite();
+    Q_INVOKABLE void resetgrille();
+*/
 /*
     void printTab();
+*/
+/*
+    Q_PROPERTY(int scoreQML READ readScore WRITE changeScore NOTIFY scoreChanged);
+    Q_PROPERTY(int bestScoreQML READ readBestScore NOTIFY bestScoreChanged);
+    Q_PROPERTY(bool gameOverQML READ readGameOver NOTIFY gameOverChanged);
+    Q_PROPERTY(QList<QString> casesQML READ readCases NOTIFY casesChanged);
 */
 
 private:
