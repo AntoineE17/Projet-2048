@@ -32,7 +32,10 @@ void grid::resetTab()
     {
         setTab(k, 0);
     }
+    tabUpdated();
 }
+
+
 
 QList<QString> grid::getTab()
 {
@@ -45,6 +48,23 @@ QList<QString> grid::getTab()
     return tabValuesStr;
 }
 
+// Sauvegarde du dernier mouvement
+void grid::setBack()
+{
+    back = tab;
+}
+
+QList<QString> grid::getBack()
+{
+    QList<QString> backValuesStr;
+    for(int k=0; k<=15; k++)
+    {
+        if(tab[k]!=0) backValuesStr.append(QString::number(tab[k]));
+        else if(tab[k]==0) backValuesStr.append(QString::fromStdString(" "));
+    }
+    return backValuesStr;
+}
+
 void grid::resetGame()
 {
     resetTab();
@@ -54,21 +74,19 @@ void grid::resetGame()
     tabUpdated();
 }
 
-// Generation d'une nouvelle tuile
+
+// Génération d'une nouvelle tuile
 void grid::generateNewTile()
 {
-    int countFree=0;
+    QList<int> free;
     for(int k=0; k<=15; k++)
     {
-        if(tab[k]==0)
-        {
-            countFree++;
-        }
+        if(tab[k]==0) free.append(k);
     }
-    if(countFree >0)
+    if(!free.isEmpty())
     {
-         // whereToAdd indique la position de la tuile à générer
-        int whereToAdd = generateRandom(countFree);
+         // whereToAdd indique l'indice dans free de la position de la tuile à générer
+        int whereToAdd = generateRandom(free.length());
 
         // On génère une tuile de valeur 4 avec une probabilité de 0.2 et de valeur 2 avec une probabilité de 0.8
         int whatToAdd;
@@ -76,16 +94,7 @@ void grid::generateNewTile()
         if(rd==0) whatToAdd=4;
         else whatToAdd=2;
 
-        // On a un numéro de tuile libre, reste à la trouver parmi toutes les tuiles
-        countFree = -1; // whereToAdd est un indice entre 0 et countFree-1
-        for(int k=0; k<=15; k++)
-        {
-            if(tab[k]==0)
-            {
-                countFree++;
-                if(countFree==whereToAdd) tab[whereToAdd]=whatToAdd;
-            }
-        }
+        tab[free[whereToAdd]]=whatToAdd;
     }
     testGameOver();
 }
@@ -135,7 +144,13 @@ void grid::moveUp()
     slideUp();
     mergeUp();
     slideUp();
-    generateNewTile();
+    setBack();
+    if(updated)
+    {
+        generateNewTile();
+        scoreUpdated();
+    }
+    tabUpdated();
 }
 
 void grid::slideUp()
@@ -156,6 +171,7 @@ void grid::slideUp()
                 tab[4*i+j]=0;
                 iMinFree++;
             }
+            else if((tab[4*i+j]!=0)&&(iMinFree==i)) iMinFree++;
             i++;
         }
     }
@@ -165,7 +181,8 @@ void grid::mergeUp()
 {
     for(int j=0; j<=3; j++)
     {
-        for(int i=0; i<3; i++)
+        int i=0;
+        while(i<=2)
         {
             if(tab[4*i+j]==tab[4*(i+1)+j])
             {
@@ -173,6 +190,7 @@ void grid::mergeUp()
                 setTab(4*i+j, created);
                 setTab(4*(i+1)+j, 0);
                 score += created;
+                scoreUpdated();
                 i++;
                 i++;
             }
@@ -186,7 +204,13 @@ void grid::moveDown()
     slideDown();
     mergeDown();
     slideDown();
-    generateNewTile();
+    setBack();
+    if(updated)
+    {
+        generateNewTile();
+        scoreUpdated();
+    }
+    tabUpdated();
 }
 
 void grid::slideDown()
@@ -207,6 +231,7 @@ void grid::slideDown()
                 tab[4*i+j]=0;
                 iMinFree--;
             }
+            else if((tab[4*i+j]!=0)&&(iMinFree==i)) iMinFree--;
             i--;
         }
     }
@@ -216,7 +241,8 @@ void grid::mergeDown()
 {
     for(int j=0; j<=3; j++)
     {
-        for(int i=3; i>0; i--)
+        int i=3;
+        while(i>=1)
         {
             if(tab[4*i+j]==tab[4*(i-1)+j])
             {
@@ -224,6 +250,7 @@ void grid::mergeDown()
                 setTab(4*i+j, created);
                 setTab(4*(i-1)+j, 0);
                 score += created;
+                scoreUpdated();
                 i--;
                 i--;
             }
@@ -237,7 +264,13 @@ void grid::moveLeft()
     slideLeft();
     mergeLeft();
     slideLeft();
-    generateNewTile();
+    setBack();
+    if(updated)
+    {
+        generateNewTile();
+        scoreUpdated();
+    }
+    tabUpdated();
 }
 
 void grid::slideLeft()
@@ -258,6 +291,7 @@ void grid::slideLeft()
                 tab[4*i+j]=0;
                 jMinFree++;
             }
+            else if((tab[4*i+j]!=0)&&(jMinFree==j)) jMinFree++;
             j++;
         }
     }
@@ -267,7 +301,8 @@ void grid::mergeLeft()
 {
     for(int i=0; i<=3; i++)
     {
-        for(int j=0; j<3; j++)
+        int j=0;
+        while(j<=2)
         {
             if(tab[4*i+j]==tab[4*i+(j+1)])
             {
@@ -275,6 +310,7 @@ void grid::mergeLeft()
                 setTab(4*i+j, created);
                 setTab(4*i+(j+1), 0);
                 score += created;
+                scoreUpdated();
                 j++;
                 j++;
             }
@@ -289,6 +325,14 @@ void grid::moveRight()
     mergeRight();
     slideRight();
     generateNewTile();
+    tabUpdated();
+    setBack();
+    if(updated)
+    {
+        generateNewTile();
+        scoreUpdated();
+    }
+    tabUpdated();
 }
 
 void grid::slideRight()
@@ -309,6 +353,7 @@ void grid::slideRight()
                 tab[4*i+j]=0;
                 jMinFree--;
             }
+            else if((tab[4*i+j]!=0)&&(jMinFree==j)) jMinFree--;
             j--;
         }
     }
@@ -318,7 +363,8 @@ void grid::mergeRight()
 {
     for(int i=0; i<=3; i++)
     {
-        for(int j=3; j>0; j--)
+        int j=3;
+        while(j>=1)
         {
             if(tab[4*i+j]==tab[4*i+(j-1)])
             {
@@ -326,6 +372,7 @@ void grid::mergeRight()
                 setTab(4*i+j, created);
                 setTab(4*i+(j-1), 0);
                 score += created;
+                scoreUpdated();
                 j--;
                 j--;
             }
@@ -458,6 +505,22 @@ QString grid::colorChoice(QString a, int b)
         }
 }
 
+int grid::getColor()
+{
+    return color;
+}
+
+void grid::setColor(int a)
+{
+    color = a;
+}
+
+void grid::changeColor(int a)
+{
+    for (int i=0; i<=15; i++) colorChoice(QString::number(tab[i]),a);
+    setColor(a);
+}
+
 bool grid::testBlocked(int x, int y)
 {
     for(int i=0; i<=3; i++)
@@ -498,28 +561,7 @@ void grid::testGameOver()
     gameOver = true;
 }
 
-int grid::getColor()
+bool grid::getGameOver()
 {
-    return color;
+    return gameOver;
 }
-
-void grid::setColor(int a)
-{
-    color = a;
-}
-
-void grid::changeColor(int a)
-{
-    for  (int i; i<=15; i++)
-        colorChoice(QString::number(tab[i]),a);
-    setColor(a);
-}
-/*
-void grid::printTab()
-{
-    for(int i=0; i<=3; i++)
-    {
-        cout<<tab[4*i]<<tab[4*i+1]<<tab[4*i+2]<<tab[4*i+3]<<endl;
-    }
-}
-*/
