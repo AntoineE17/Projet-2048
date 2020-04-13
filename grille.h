@@ -60,6 +60,7 @@ signals:
     void scoreUpdated();
     void recordUpdated();
     void gameOverUpdated();
+    void colorUpdated();
 
 private:
     int score;

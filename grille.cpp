@@ -67,6 +67,9 @@ QList<QString> grid::getBack()
 
 void grid::resetGame()
 {
+    updated = true;
+    gameOver = false;
+    setColor(0);
     resetTab();
     generateNewTile();
     generateNewTile();
@@ -149,8 +152,11 @@ void grid::moveUp()
     {
         generateNewTile();
         scoreUpdated();
+        recordUpdated();
     }
     tabUpdated();
+    setBack();
+    updated = false;
 }
 
 void grid::slideUp()
@@ -169,6 +175,7 @@ void grid::slideUp()
             {
                 tab[4*iMinFree+j]=tab[4*i+j];
                 tab[4*i+j]=0;
+                updated = true;
                 iMinFree++;
             }
             else if((tab[4*i+j]!=0)&&(iMinFree==i)) iMinFree++;
@@ -189,6 +196,7 @@ void grid::mergeUp()
                 int created = tab[4*i+j]+tab[4*(i+1)+j];
                 setTab(4*i+j, created);
                 setTab(4*(i+1)+j, 0);
+                updated = true;
                 score += created;
                 scoreUpdated();
                 i++;
@@ -204,13 +212,15 @@ void grid::moveDown()
     slideDown();
     mergeDown();
     slideDown();
-    setBack();
     if(updated)
     {
         generateNewTile();
         scoreUpdated();
+        recordUpdated();
     }
     tabUpdated();
+    setBack();
+    updated = false;
 }
 
 void grid::slideDown()
@@ -229,6 +239,7 @@ void grid::slideDown()
             {
                 tab[4*iMinFree+j]=tab[4*i+j];
                 tab[4*i+j]=0;
+                updated = true;
                 iMinFree--;
             }
             else if((tab[4*i+j]!=0)&&(iMinFree==i)) iMinFree--;
@@ -249,6 +260,7 @@ void grid::mergeDown()
                 int created = tab[4*i+j]+tab[4*(i-1)+j];
                 setTab(4*i+j, created);
                 setTab(4*(i-1)+j, 0);
+                updated = true;
                 score += created;
                 scoreUpdated();
                 i--;
@@ -269,8 +281,11 @@ void grid::moveLeft()
     {
         generateNewTile();
         scoreUpdated();
+        recordUpdated();
     }
     tabUpdated();
+    setBack();
+    updated = false;
 }
 
 void grid::slideLeft()
@@ -289,6 +304,7 @@ void grid::slideLeft()
             {
                 tab[4*i+jMinFree]=tab[4*i+j];
                 tab[4*i+j]=0;
+                updated = true;
                 jMinFree++;
             }
             else if((tab[4*i+j]!=0)&&(jMinFree==j)) jMinFree++;
@@ -309,6 +325,7 @@ void grid::mergeLeft()
                 int created = tab[4*i+j]+tab[4*i+(j+1)];
                 setTab(4*i+j, created);
                 setTab(4*i+(j+1), 0);
+                updated = true;
                 score += created;
                 scoreUpdated();
                 j++;
@@ -324,15 +341,17 @@ void grid::moveRight()
     slideRight();
     mergeRight();
     slideRight();
-    generateNewTile();
     tabUpdated();
     setBack();
     if(updated)
     {
         generateNewTile();
         scoreUpdated();
+        recordUpdated();
     }
     tabUpdated();
+    setBack();
+    updated = false;
 }
 
 void grid::slideRight()
@@ -351,6 +370,7 @@ void grid::slideRight()
             {
                 tab[4*i+jMinFree]=tab[4*i+j];
                 tab[4*i+j]=0;
+                updated = true;
                 jMinFree--;
             }
             else if((tab[4*i+j]!=0)&&(jMinFree==j)) jMinFree--;
@@ -371,6 +391,7 @@ void grid::mergeRight()
                 int created = tab[4*i+j]+tab[4*i+(j-1)];
                 setTab(4*i+j, created);
                 setTab(4*i+(j-1), 0);
+                updated = true;
                 score += created;
                 scoreUpdated();
                 j--;
@@ -383,7 +404,8 @@ void grid::mergeRight()
 
 // Gestion des couleurs
 QString grid::colorChoice(QString a, int b)
-{   if (b==0){
+{   if(b==0)
+    {
         if(a=="2") return("#e6d8d3");
         else if(a=="4") return("#f0deca");
         else if(a=="8") return("#f2b179");
@@ -402,8 +424,9 @@ QString grid::colorChoice(QString a, int b)
         else if(a=="65536") return("#5f9ee2");
         else if(a=="131072") return("#0374b4");
         else return("#cdc1b4");
-        }
-    if (b==1){
+    }
+    else if(b==1)
+    {
         if(a=="2") return("#e6d8d3");
         else if(a=="4") return("#f0deca");
         else if(a=="8") return("#f2b179");
@@ -422,8 +445,9 @@ QString grid::colorChoice(QString a, int b)
         else if(a=="65536") return("#5f9ee2");
         else if(a=="131072") return("#0374b4");
         else return("#cdc1b4");
-        }
-    if (b==2){
+    }
+    else if(b==2)
+    {
         if(a=="2") return("#e6d8d3");
         else if(a=="4") return("#f0deca");
         else if(a=="8") return("#f2b179");
@@ -442,8 +466,9 @@ QString grid::colorChoice(QString a, int b)
         else if(a=="65536") return("#5f9ee2");
         else if(a=="131072") return("#0374b4");
         else return("#cdc1b4");
-        }
-    if (b==3){
+    }
+    else if(b==3)
+    {
         if(a=="2") return("#e6d8d3");
         else if(a=="4") return("#f0deca");
         else if(a=="8") return("#f2b179");
@@ -462,8 +487,9 @@ QString grid::colorChoice(QString a, int b)
         else if(a=="65536") return("#5f9ee2");
         else if(a=="131072") return("#0374b4");
         else return("#cdc1b4");
-        }
-    if (b==4){
+    }
+    else if(b==4)
+    {
         if(a=="2") return("#e6d8d3");
         else if(a=="4") return("#f0deca");
         else if(a=="8") return("#f2b179");
@@ -482,8 +508,9 @@ QString grid::colorChoice(QString a, int b)
         else if(a=="65536") return("#5f9ee2");
         else if(a=="131072") return("#0374b4");
         else return("#cdc1b4");
-        }
-    if (b==5){
+    }
+    else if(b==5)
+    {
         if(a=="2") return("#e6d8d3");
         else if(a=="4") return("#f0deca");
         else if(a=="8") return("#f2b179");
@@ -502,7 +529,7 @@ QString grid::colorChoice(QString a, int b)
         else if(a=="65536") return("#5f9ee2");
         else if(a=="131072") return("#0374b4");
         else return("#cdc1b4");
-        }
+    }
     else return("#cdc1b4");
 }
 
@@ -516,7 +543,6 @@ void grid::setColor(int a)
     color = a;
     colorUpdated();
 }
-
 
 bool grid::testBlocked(int x, int y)
 {
@@ -555,7 +581,7 @@ void grid::testGameOver()
             break;
         }
     }
-    gameOver = true;
+    gameOver = tempGameOver;
 }
 
 bool grid::getGameOver()
