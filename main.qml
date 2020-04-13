@@ -587,7 +587,7 @@ Window {
         }
 
         Rectangle {
-            id: bestscore
+            id: record
             x: 55
             y: 29
             width: 80
@@ -606,7 +606,7 @@ Window {
                 y: -15
                 width: 70
                 height: 70
-                text: grilleQML.bestScoreQML
+                text: grilleQML.recordQML
                 anchors.horizontalCenterOffset: 0
                 font.weight: Font.Black
                 horizontalAlignment: Text.AlignHCenter
@@ -625,7 +625,7 @@ Window {
                 y: -5
                 width: 85
                 height: 35
-                text: "Best Score"
+                text: "Record"
                 font.weight: Font.Black
                 font.pixelSize: 12
                 anchors.verticalCenter: parent.verticalCenter
