@@ -16,6 +16,8 @@ public:
     void setTab(int pos, int val);
     void resetTab();
     void resetGame();
+    void generateNewTile();
+    int generateRandom(int n);
     void setScore(int val);
     int getScore();
     void resetScore();
@@ -60,6 +62,7 @@ private:
     int record;
     QList<int> tab;
     bool gameOver;
+    bool updated;
 
 };
 
