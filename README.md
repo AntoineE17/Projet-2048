@@ -1,4 +1,4 @@
-# Projet-2048-
+# Projet-2048
 
 Ce répertoire contient le projet en cours de développement par Adrien Rulfo et Antoine Gilot dans le cadre de l'électif "Programmation des interfaces graphiques en C++" suivi à l'École Centrale de Lyon au S8 2020 sous la direction de Stéphane Derrode.
 
