@@ -670,12 +670,10 @@ Window {
 
             acceptedButtons: Qt.LeftButton
             onClicked: {
-                if (mouse.button === Qt.RightButton)
-                    parent.plugTexteColor = 'blue';
-                else
-                    parent.plugTexteColor = 'red';
-                }
+                grilleQML.resetgrille()
             }
+
+        }
     }
 
     Text {
