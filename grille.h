@@ -39,17 +39,18 @@ public:
     QString colorChoice(QString a);
     bool testBlocked(int x, int y);
     void testGameOver();
-
-
 /*
-    void printTab();
+    Q_PROPERTY(int scoreQML READ getScore WRITE changeScore NOTIFY scoreChanged);
+    Q_PROPERTY(int bestScoreQML READ getRecord NOTIFY bestScoreChanged);
+    Q_PROPERTY(bool gameOverQML READ readGameOver NOTIFY gameOverChanged);
+    Q_PROPERTY(QList<QString> tabQML READ getTab NOTIFY casesChanged);
 */
 
-    Q_PROPERTY(int scoreQML READ readScore WRITE changeScore NOTIFY scoreChanged);
-    Q_PROPERTY(int bestScoreQML READ readBestScore NOTIFY bestScoreChanged);
-    Q_PROPERTY(bool gameOverQML READ readGameOver NOTIFY gameOverChanged);
-    Q_PROPERTY(QList<QString> casesQML READ getTab NOTIFY casesChanged);
-
+signals:
+    void scoreChanged();
+    void RecordChanged();
+    void gameOverChanged();
+    void casesChanged();
 
 private:
     int score;
