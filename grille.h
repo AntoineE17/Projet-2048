@@ -12,9 +12,16 @@ class grid : public QObject
 {
     Q_OBJECT
 public:
-    explicit grid(QObject *parent = nullptr);
-
+    explicit grid(QObject *parent = nullptr);    
     void setTab(int pos, int val);
+    void resetTab();
+    void resetGame();
+    void setScore(int val);
+    int getScore();
+    void resetScore();
+    void setRecord(int val);
+    int getRecord();
+    void resetRecord();
     void moveUp();
     void slideUp();
     void mergeUp();
@@ -27,6 +34,9 @@ public:
     void moveRight();
     void slideRight();
     void mergeRight();
+    QString colorChoice(QString a);
+    bool testBlocked(int x, int y);
+    void testGameOver();
 
 /*
     Q_INVOKABLE void boutonhaut();
@@ -49,7 +59,7 @@ private:
     int score;
     int record;
     QList<int> tab;
-    bool didTabChanged;
+    bool gameOver;
 
 };
 
