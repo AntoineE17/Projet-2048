@@ -1,6 +1,6 @@
 /* grille.cpp : Gestion de la grille de jeu
  * Auteurs : Antoine Gilot & Adrien Rulfo
- * Date de dernière modification : 13/04/2020
+ * Date de dernière modification : 14/04/2020
  */
 
 #include "grille.h"
@@ -12,30 +12,25 @@ using namespace std;
 
 grid::grid(QObject *parent) : QObject(parent)
 {
-    score = 0;
+    srand(time(NULL));
+    inProgress=false;
     color = 0;
+    score = 0;
     record = 0;
-    for (int i=0; i<16;i++)
-    {
-        tab.append(0);
-    }
+    for (int i=0; i<16;i++) tab.append(0);
 }
 
 void grid::setTab(int pos, int val)
 {
     tab[pos] = val;
+    tabUpdated();
 }
 
 void grid::resetTab()
 {
-    for(int k=0; k<=15; k++)
-    {
-        setTab(k, 0);
-    }
+    for(int k=0; k<=15; k++) setTab(k, 0);
     tabUpdated();
 }
-
-
 
 QList<QString> grid::getTab()
 {
@@ -48,41 +43,44 @@ QList<QString> grid::getTab()
     return tabValuesStr;
 }
 
-// Sauvegarde du dernier mouvement
-void grid::setBack()
+// SAUVEGARDE DU DERNIER MOUVEMENT
+void grid::setTabSaved()
 {
-    back = tab;
+    tabSaved = tab;
+    setScoreSaved();
 }
 
-QList<QString> grid::getBack()
+QList<QString> grid::getTabSaved()
 {
-    QList<QString> backValuesStr;
+    QList<QString> tabSavedValuesStr;
     for(int k=0; k<=15; k++)
     {
-        if(tab[k]!=0) backValuesStr.append(QString::number(back[k]));
-        else if(tab[k]==0) backValuesStr.append(QString::fromStdString(" "));
+        if(tab[k]!=0) tabSavedValuesStr.append(QString::number(tabSaved[k]));
+        else if(tab[k]==0) tabSavedValuesStr.append(QString::fromStdString(" "));
     }
-    return backValuesStr;
+    return tabSavedValuesStr;
 }
-void grid::loadBack()
+void grid::loadTabSaved()
 {
-    tab = back;
+    tab = tabSaved;
     tabUpdated();
+    loadScoreSaved();
+    testGameOver();
+    gameOverUpdated();
 }
 void grid::resetGame()
 {
+    inProgress = true;
     updated = true;
     gameOver = false;
-    setColor(0);
     resetTab();
-    generateNewTile();
-    generateNewTile();
     resetScore();
-    tabUpdated();
+    generateNewTile();
+    generateNewTile();
 }
 
 
-// Génération d'une nouvelle tuile
+// GENERATION D'UNE NOUVELLE TUILE
 void grid::generateNewTile()
 {
     QList<int> free;
@@ -103,64 +101,81 @@ void grid::generateNewTile()
 
         tab[free[whereToAdd]]=whatToAdd;
     }
+    tabUpdated();
     testGameOver();
 }
-
 int grid::generateRandom(int n)
 {
-    srand(time(NULL));
     return rand()%n;
 }
 
-// Gestion du score
+// SCORE & RECORD
 void grid::setScore(int val)
 {
     score = val;
 }
-
+void grid::updateScore(int val)
+{
+    score += val;
+    updateRecord();
+    scoreUpdated();
+}
 int grid::getScore()
 {
     return score;
 }
-
 void grid::resetScore()
 {
     setScore(0);
+    scoreUpdated();
 }
 
-// Gestion du score
+void grid::setScoreSaved()
+{
+    scoreSaved = score;
+}
+int grid::getScoreSaved()
+{
+    return scoreSaved;
+}
+void grid::loadScoreSaved()
+{
+    score = getScoreSaved();
+    scoreUpdated();
+}
+
 void grid::setRecord(int val)
 {
     record = val;
 }
-
+void grid::updateRecord()
+{
+    if(score>record) record=score;
+    recordUpdated();
+}
 int grid::getRecord()
 {
     return record;
 }
-
 void grid::resetRecord()
 {
     setRecord(0);
 }
 
 
-//Gestion des commandes
+// MOUVEMENTS
 void grid::moveUp()
 {
-    setBack();
-    slideUp();
-    mergeUp();
-    slideUp();
-    if(updated)
+    if(inProgress && !gameOver)
     {
-        generateNewTile();
-        scoreUpdated();
-        recordUpdated();
+        setTabSaved();
+        slideUp();
+        mergeUp();
+        slideUp();
+        if(updated) generateNewTile();
+        tabUpdated();
+        updated = false;
     }
-    tabUpdated();
-
-    updated = false;
 }
 
 void grid::slideUp()
@@ -168,17 +183,14 @@ void grid::slideUp()
     for(int j=0; j<=3; j++)
     {
         int iMinFree=0;
-        if(tab[4*iMinFree+j]!=0)
-        {
-            iMinFree++;
-        }
+        if(tab[4*iMinFree+j]!=0) iMinFree++;
         int i=1;
         while(i<=3)
         {
             if((tab[4*i+j]!=0)&&(iMinFree<i))
             {
-                tab[4*iMinFree+j]=tab[4*i+j];
-                tab[4*i+j]=0;
+                setTab(4*iMinFree+j, tab[4*i+j]);
+                setTab(4*i+j, 0);
                 updated = true;
                 iMinFree++;
             }
@@ -201,8 +213,7 @@ void grid::mergeUp()
                 setTab(4*i+j, created);
                 setTab(4*(i+1)+j, 0);
                 updated = true;
-                score += created;
-                scoreUpdated();
+                updateScore(created);
                 i++;
                 i++;
             }
@@ -212,20 +223,16 @@ void grid::mergeUp()
 }
 
 void grid::moveDown()
-{
-    setBack();
-    slideDown();
-    mergeDown();
-    slideDown();
-    if(updated)
+{   if(inProgress && !gameOver)
     {
-        generateNewTile();
-        scoreUpdated();
-        recordUpdated();
+        setTabSaved();
+        slideDown();
+        mergeDown();
+        slideDown();
+        if(updated) generateNewTile();
+        tabUpdated();
+        updated = false;
     }
-    tabUpdated();
-
-    updated = false;
 }
 
 void grid::slideDown()
@@ -233,10 +240,7 @@ void grid::slideDown()
     for(int j=0; j<=3; j++)
     {
         int iMinFree=3;
-        if(tab[4*iMinFree+j]!=0)
-        {
-            iMinFree--;
-        }
+        if(tab[4*iMinFree+j]!=0) iMinFree--;
         int i=2;
         while(i>=0)
         {
@@ -266,8 +270,7 @@ void grid::mergeDown()
                 setTab(4*i+j, created);
                 setTab(4*(i-1)+j, 0);
                 updated = true;
-                score += created;
-                scoreUpdated();
+                updateScore(created);
                 i--;
                 i--;
             }
@@ -278,18 +281,16 @@ void grid::mergeDown()
 
 void grid::moveLeft()
 {
-    setBack();
-    slideLeft();
-    mergeLeft();
-    slideLeft();
-    if(updated)
+    if(inProgress && !gameOver)
     {
-        generateNewTile();
-        scoreUpdated();
-        recordUpdated();
+        setTabSaved();
+        slideLeft();
+        mergeLeft();
+        slideLeft();
+        if(updated) generateNewTile();
+        tabUpdated();
+        updated = false;
     }
-    tabUpdated();
-    updated = false;
 }
 
 void grid::slideLeft()
@@ -297,17 +298,14 @@ void grid::slideLeft()
     for(int i=0; i<=3; i++)
     {
         int jMinFree=0;
-        if(tab[4*i+jMinFree]!=0)
-        {
-            jMinFree++;
-        }
+        if(tab[4*i+jMinFree]!=0) jMinFree++;
         int j=1;
         while(j<=3)
         {
             if((tab[4*i+j]!=0)&&(jMinFree<j))
             {
-                tab[4*i+jMinFree]=tab[4*i+j];
-                tab[4*i+j]=0;
+                setTab(4*i+jMinFree, tab[4*i+j]);
+                setTab(4*i+j, 0);
                 updated = true;
                 jMinFree++;
             }
@@ -330,8 +328,7 @@ void grid::mergeLeft()
                 setTab(4*i+j, created);
                 setTab(4*i+(j+1), 0);
                 updated = true;
-                score += created;
-                scoreUpdated();
+                updateScore(created);
                 j++;
                 j++;
             }
@@ -342,18 +339,16 @@ void grid::mergeLeft()
 
 void grid::moveRight()
 {
-    setBack();
-    slideRight();
-    mergeRight();
-    slideRight();
-    if(updated)
+    if(inProgress && !gameOver)
     {
-        generateNewTile();
-        scoreUpdated();
-        recordUpdated();
+        setTabSaved();
+        slideRight();
+        mergeRight();
+        slideRight();
+        if(updated) generateNewTile();
+        tabUpdated();
+        updated = false;
     }
-    tabUpdated();
-    updated = false;
 }
 
 void grid::slideRight()
@@ -361,17 +356,14 @@ void grid::slideRight()
     for(int i=0; i<=3; i++)
     {
         int jMinFree=3;
-        if(tab[4*i+jMinFree]!=0)
-        {
-            jMinFree--;
-        }
+        if(tab[4*i+jMinFree]!=0) jMinFree--;
         int j=2;
         while(j>=0)
         {
             if((tab[4*i+j]!=0)&&(jMinFree>j))
             {
-                tab[4*i+jMinFree]=tab[4*i+j];
-                tab[4*i+j]=0;
+                setTab(4*i+jMinFree, tab[4*i+j]);
+                setTab(4*i+j, 0);
                 updated = true;
                 jMinFree--;
             }
@@ -394,8 +386,7 @@ void grid::mergeRight()
                 setTab(4*i+j, created);
                 setTab(4*i+(j-1), 0);
                 updated = true;
-                score += created;
-                scoreUpdated();
+                updateScore(created);
                 j--;
                 j--;
             }
@@ -404,7 +395,7 @@ void grid::mergeRight()
     }
 }
 
-// Gestion des couleurs
+// COULEURS
 QString grid::colorChoice(QString a, int b)
 {   if(b==0)
     {
@@ -547,6 +538,8 @@ void grid::setColor(int a)
     tabUpdated();
 }
 
+
+// GAMEOVER
 bool grid::testBlocked(int x, int y)
 {
     for(int i=0; i<=3; i++)
@@ -574,15 +567,9 @@ void grid::testGameOver()
         for(int j=0; j<=3; j++)
         {
             tempGameOver = testBlocked(i, j);
-            if(!tempGameOver)
-            {
-                break;
-            }
+            if(!tempGameOver) break;
         }
-        if(!tempGameOver)
-        {
-            break;
-        }
+        if(!tempGameOver) break;
     }
     gameOver = tempGameOver;
     gameOverUpdated();

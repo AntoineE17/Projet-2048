@@ -694,7 +694,7 @@ Window {
             }}
 
         Rectangle {
-            id: newpartie
+            id: newgame
             x: 63
             y: 37
             width: 85
@@ -810,7 +810,7 @@ Window {
                 anchors.topMargin: 0
                 acceptedButtons: Qt.LeftButton
                 onClicked: {
-                    grilleQML.loadBack()
+                    grilleQML.loadTabSaved()
                 }
             }
 

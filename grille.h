@@ -17,18 +17,25 @@ public:
     void resetTab();
     Q_INVOKABLE QList<QString> getTab();
 
-    void setBack();
-    Q_INVOKABLE QList<QString> getBack();
-    Q_INVOKABLE void loadBack();
+    void setTabSaved();
+    Q_INVOKABLE QList<QString> getTabSaved();
+    Q_INVOKABLE void loadTabSaved();
     Q_INVOKABLE void resetGame();
     void generateNewTile();
     int generateRandom(int n);
+
     Q_INVOKABLE void setScore(int val);
+    void updateScore(int val);
     Q_INVOKABLE int getScore();
     void resetScore();
+    void setScoreSaved();
+    int getScoreSaved();
+    void loadScoreSaved();
     Q_INVOKABLE void setRecord(int val);
+    void updateRecord();
     Q_INVOKABLE int getRecord();
     void resetRecord();
+
     Q_INVOKABLE void moveUp();
     void slideUp();
     void mergeUp();
@@ -63,14 +70,15 @@ signals:
     void colorUpdated();
 
 private:
+    bool inProgress;
     int score;
+    int scoreSaved;
     int color;
     int record;
     QList<int> tab;
+    QList<int> tabSaved;
     bool gameOver;
     bool updated;
-    QList<int> back;
-
 };
 
 #endif // GRILLE_H
