@@ -40,14 +40,7 @@ public:
     QString colorChoice(QString a);
     bool testBlocked(int x, int y);
     void testGameOver();
-
-/*
-    Q_INVOKABLE void boutonhaut();
-    Q_INVOKABLE void boutonbas();
-    Q_INVOKABLE void boutongauche();
-    Q_INVOKABLE void boutondroite();
-    Q_INVOKABLE void resetgrille();
-*/
+    
 /*
     void printTab();
 */
