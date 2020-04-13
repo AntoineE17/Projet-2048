@@ -724,7 +724,7 @@ Window {
 
                 acceptedButtons: Qt.LeftButton
                 onClicked: {
-                    grilleQML.resetgrille()
+                    grilleQML.resetGame()
                 }
 
             }
