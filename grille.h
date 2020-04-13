@@ -12,9 +12,15 @@ class grid : public QObject
 {
     Q_OBJECT
 public:
-    explicit grid(QObject *parent = nullptr);
-
+    explicit grid(QObject *parent = nullptr);    
     void setTab(int pos, int val);
+
+    void setScore(int val);
+    int getScore();
+    void resetScore();
+    void setRecord(int val);
+    int getRecord();
+    void resetRecord();
     void moveUp();
     void slideUp();
     void mergeUp();

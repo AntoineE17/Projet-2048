@@ -17,6 +17,41 @@ void grid::setTab(int pos, int val)
     tab[pos] = val;
 }
 
+
+// Gestion du score
+void grid::setScore(int val)
+{
+    score = val;
+}
+
+int grid::getScore()
+{
+    return score;
+}
+
+void grid::resetScore()
+{
+    setScore(0);
+}
+
+// Gestion du score
+void grid::setRecord(int val)
+{
+    record = val;
+}
+
+int grid::getRecord()
+{
+    return record;
+}
+
+void grid::resetRecord()
+{
+    setRecord(0);
+}
+
+
+//Gestion des commandes
 void grid::moveUp()
 {
     slideUp();
@@ -58,6 +93,7 @@ void grid::mergeUp()
                 int created = tab[4*i+j]+tab[4*(i+1)+j];
                 setTab(4*i+j, created);
                 setTab(4*(i+1)+j, 0);
+                score += created;
                 i++;
                 i++;
             }
@@ -110,6 +146,7 @@ void grid::mergeDown()
                 int created = tab[4*i+j]+tab[4*(i-1)+j];
                 setTab(4*i+j, created);
                 setTab(4*(i-1)+j, 0);
+                score += created;
                 i--;
                 i--;
             }
@@ -162,6 +199,7 @@ void grid::mergeLeft()
                 int created = tab[4*i+j]+tab[4*i+(j+1)];
                 setTab(4*i+j, created);
                 setTab(4*i+(j+1), 0);
+                score += created;
                 j++;
                 j++;
             }
@@ -214,6 +252,7 @@ void grid::mergeRight()
                 int created = tab[4*i+j]+tab[4*i+(j-1)];
                 setTab(4*i+j, created);
                 setTab(4*i+(j-1), 0);
+                score += created;
                 j--;
                 j--;
             }
