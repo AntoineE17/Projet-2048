@@ -10,6 +10,102 @@ Window {
     title: qsTr("FenetreJeu")
 
     Rectangle {
+        id: fond1
+        x: 55
+        y: 36
+        width: 310
+        height: 310
+        color: "#bbada1"
+        radius: 3
+        border.width: 0
+        opacity: (grilleQML.gameOverQML) ? 0.7 : 0
+
+        Text {
+            id: text46
+            x: 8
+            y: 110
+            width: 302
+            height: 64
+            color: "#4e4a46"
+            text: "Game Over"
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 50
+            font.bold: true
+            font.family: "Helvetica"
+        }
+
+        Rectangle {
+            id: newpartie1
+            x: 63
+            y: 37
+            width: 85
+            height: 35
+            color: "#8e7a66"
+            radius: 3
+            border.width: 0
+            MouseArea {
+                id: mouseArea1
+                x: 0
+                y: 0
+                width: 85
+                height: 35
+                anchors.top: parent.top
+                anchors.topMargin: 0
+                acceptedButtons: Qt.LeftButton
+                onClicked: {
+                    grilleQML.resetGame()
+                }
+            }
+
+            Text {
+                id: text24
+                x: 142
+                y: 78
+                width: 85
+                height: 35
+                text: "Nouvelle"
+                font.weight: Font.Black
+                font.pixelSize: 12
+                anchors.verticalCenter: parent.verticalCenter
+                focus: true
+                horizontalAlignment: Text.AlignHCenter
+                anchors.verticalCenterOffset: -7
+                verticalAlignment: Text.AlignVCenter
+                font.family: "Verdana"
+                anchors.horizontalCenterOffset: 0
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+
+            Text {
+                id: text25
+                x: 132
+                y: 69
+                width: 85
+                height: 35
+                text: "partie"
+                font.weight: Font.Black
+                font.pixelSize: 12
+                anchors.verticalCenter: parent.verticalCenter
+                focus: true
+                horizontalAlignment: Text.AlignHCenter
+                font.family: "Verdana"
+                verticalAlignment: Text.AlignVCenter
+                anchors.verticalCenterOffset: 7
+                anchors.horizontalCenterOffset: 0
+                anchors.horizontalCenter: parent.horizontalCenter
+            }
+            anchors.verticalCenter: parent.verticalCenter
+            anchors.verticalCenterOffset: 25
+            anchors.horizontalCenterOffset: 5
+            anchors.horizontalCenter: parent.horizontalCenter
+        }
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: 25
+        anchors.horizontalCenterOffset: 0
+        anchors.horizontalCenter: parent.horizontalCenter
+    }
+
+    Rectangle {
         id: fond
         x: 53
         y: 29
@@ -72,8 +168,8 @@ Window {
                 font.pixelSize: 26
 
 
-                }
             }
+        }
 
 
         Rectangle {
@@ -587,7 +683,7 @@ Window {
         }
 
         Rectangle {
-            id: bestscore
+            id: record
             x: 55
             y: 29
             width: 80
@@ -604,19 +700,19 @@ Window {
                 id: text17
                 x: 0
                 y: -15
-                width: 70
-                height: 70
-                text: grilleQML.bestScoreQML
-                anchors.horizontalCenterOffset: 0
+                width: 80
+                height: 35
+                text: grilleQML.recordQML
+                anchors.horizontalCenterOffset: 1
                 font.weight: Font.Black
                 horizontalAlignment: Text.AlignHCenter
                 focus: true
-                anchors.verticalCenterOffset: 0
-                verticalAlignment: Text.AlignVCenter
+                anchors.verticalCenterOffset: 1
+                verticalAlignment: Text.AlignBottom
                 font.family: "Verdana"
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize: 26
+                font.pixelSize: 16
             }
 
             Text {
@@ -625,15 +721,15 @@ Window {
                 y: -5
                 width: 85
                 height: 35
-                text: "Best Score"
+                text: "Record"
                 font.weight: Font.Black
                 font.pixelSize: 12
                 anchors.verticalCenter: parent.verticalCenter
                 focus: true
                 horizontalAlignment: Text.AlignHCenter
                 font.family: "Verdana"
-                verticalAlignment: Text.AlignVCenter
-                anchors.verticalCenterOffset: -10
+                verticalAlignment: Text.AlignTop
+                anchors.verticalCenterOffset: 0
                 anchors.horizontalCenterOffset: 1
                 anchors.horizontalCenter: parent.horizontalCenter
             }
@@ -659,25 +755,25 @@ Window {
                 x: 143
                 y: 79
                 width: 70
-                height: 70
+                height: 35
                 text: grilleQML.scoreQML
                 anchors.horizontalCenterOffset: 0
                 horizontalAlignment: Text.AlignHCenter
                 font.weight: Font.Black
                 anchors.verticalCenterOffset: 0
                 focus: true
-                verticalAlignment: Text.AlignVCenter
+                verticalAlignment: Text.AlignBottom
                 font.family: "Verdana"
                 anchors.verticalCenter: parent.verticalCenter
                 anchors.horizontalCenter: parent.horizontalCenter
-                font.pixelSize: 26
+                font.pixelSize: 15
             }
 
             Text {
                 id: text22
                 x: -8
                 y: -5
-                width: 85
+                width: 70
                 height: 35
                 text: "Score"
                 font.weight: Font.Black
@@ -685,10 +781,10 @@ Window {
                 anchors.verticalCenter: parent.verticalCenter
                 focus: true
                 horizontalAlignment: Text.AlignHCenter
-                anchors.verticalCenterOffset: -10
-                verticalAlignment: Text.AlignVCenter
+                anchors.verticalCenterOffset: 0
+                verticalAlignment: Text.AlignTop
                 font.family: "Verdana"
-                anchors.horizontalCenterOffset: 1
+                anchors.horizontalCenterOffset: 0
                 anchors.horizontalCenter: parent.horizontalCenter
             }}
 
@@ -774,7 +870,211 @@ Window {
             font.bold: true
             font.family: "Helvetica"
         }
+
+        Text {
+            id: text26
+            x: -5
+            y: 319
+            width: 320
+            height: 29
+            color: "#8a8178"
+            text: "Choix d'un jeu de couleurs"
+            horizontalAlignment: Text.AlignHCenter
+            font.pixelSize: 23
+            font.bold: true
+            font.family: "Helvetica"
+        }
     }
+
+    Rectangle {
+        id: rectangle17
+        x: 46
+        y: 20
+        width: 30
+        height: 30
+        color: "#fe2c2c"
+        radius: 3
+        border.width: 0
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: 237
+        anchors.horizontalCenterOffset: -110
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        MouseArea {
+            id: mouseArea2
+            x: 0
+            y: 0
+            width: 85
+            height: 35
+            anchors.topMargin: 0
+            anchors.top: parent.top
+
+            acceptedButtons: Qt.LeftButton
+            onClicked: {
+                grilleQML.changeColor(1)
+            }
+    }}
+
+    Rectangle {
+        id: rectangle18
+        x: 46
+        y: 17
+        width: 30
+        height: 30
+        color: "#3cfc2a"
+        radius: 3
+        border.width: 0
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: 237
+        anchors.horizontalCenterOffset: -70
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        MouseArea {
+            id: mouseArea3
+            x: 0
+            y: 0
+            width: 85
+            height: 35
+            anchors.topMargin: 0
+            anchors.top: parent.top
+
+            acceptedButtons: Qt.LeftButton
+            onClicked: {
+                grilleQML.changeColor(2)
+            }
+    }}
+
+    Rectangle {
+        id: rectangle19
+        x: 41
+        y: 24
+        width: 30
+        height: 30
+        color: "#f6fd39"
+        radius: 3
+        border.width: 0
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: 237
+        anchors.horizontalCenterOffset: -30
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        MouseArea {
+            id: mouseArea4
+            x: 0
+            y: 0
+            width: 85
+            height: 35
+            anchors.topMargin: 0
+            anchors.top: parent.top
+
+            acceptedButtons: Qt.LeftButton
+            onClicked: {
+                grilleQML.changeColor(3)
+            }
+    }}
+
+    Rectangle {
+        id: rectangle20
+        x: 37
+        y: 21
+        width: 30
+        height: 30
+        color: "#0043f3"
+        radius: 3
+        border.width: 0
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: 237
+        anchors.horizontalCenterOffset: 10
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        MouseArea {
+            id: mouseArea5
+            x: 0
+            y: 0
+            width: 85
+            height: 35
+            anchors.topMargin: 0
+            anchors.top: parent.top
+
+            acceptedButtons: Qt.LeftButton
+            onClicked: {
+                grilleQML.changeColor(4)
+            }
+    }}
+
+    Rectangle {
+        id: rectangle21
+        x: 47
+        y: 26
+        width: 30
+        height: 30
+        color: "#f902f6"
+        radius: 3
+        border.width: 0
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: 237
+        anchors.horizontalCenterOffset: 50
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        MouseArea {
+            id: mouseArea6
+            x: 0
+            y: 0
+            width: 85
+            height: 35
+            anchors.topMargin: 0
+            anchors.top: parent.top
+
+            acceptedButtons: Qt.LeftButton
+            onClicked: {
+                grilleQML.changeColor(5)
+            }
+    }}
+
+    Rectangle {
+        id: rectangle22
+        x: 48
+        y: 26
+        width: 66
+        height: 30
+        color: "#faf8ef"
+        radius: 3
+        border.width: 2
+        anchors.verticalCenter: parent.verticalCenter
+        anchors.verticalCenterOffset: 237
+        anchors.horizontalCenterOffset: 107
+        anchors.horizontalCenter: parent.horizontalCenter
+
+        MouseArea {
+            id: mouseArea7
+            x: 0
+            y: 0
+            width: 85
+            height: 35
+            anchors.topMargin: 0
+            anchors.top: parent.top
+
+            acceptedButtons: Qt.LeftButton
+            onClicked: {
+                grilleQML.changeColor(0)
+            }}
+
+        Text {
+            id: text27
+            x: 0
+            y: 0
+            width: 66
+            height: 30
+            color: "#000000"
+            text: "Reset"
+            verticalAlignment: Text.AlignVCenter
+            font.pixelSize: 18
+            horizontalAlignment: Text.AlignHCenter
+            font.bold: true
+            font.family: "Helvetica"
+        }
+    }
+
 }
 
 
