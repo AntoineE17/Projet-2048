@@ -43,9 +43,9 @@ public:
     Q_INVOKABLE QString colorChoice(QString a,int b);
     bool testBlocked(int x, int y);
     Q_INVOKABLE void testGameOver();
-    int getColor();
-    void setColor(int a);
-    void changeColor(int a);
+    bool getGameOver();
+    Q_INVOKABLE int getColor();
+    Q_INVOKABLE void setColor(int a);
 
     Q_PROPERTY(int scoreQML READ getScore WRITE setScore NOTIFY scoreUpdated);
     Q_PROPERTY(int colorQML READ getColor WRITE setColor NOTIFY colorUpdated);
@@ -59,6 +59,7 @@ signals:
     void scoreUpdated();
     void recordUpdated();
     void gameOverUpdated();
+    void colorUpdated();
 
 private:
     int score;
