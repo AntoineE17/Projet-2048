@@ -31,11 +31,11 @@ Window {
             case Qt.Key_Down:
                 grilleQML.moveDown()
                 break
-            case Qt.Key_Right:
-                grilleQML.moveRight()
-                break
             case Qt.Key_Left:
                 grilleQML.moveLeft()
+                break
+            case Qt.Key_Right:
+                grilleQML.moveRight()
                 break
             }}
 
@@ -45,7 +45,7 @@ Window {
             y: 20
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[0])
+            color: grilleQML.colorChoice(grilleQML.tabQML[0])
             radius: 3
             border.width: 0
             anchors.verticalCenterOffset: -114
@@ -60,7 +60,7 @@ Window {
                 focus: true
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[0]
+                text: grilleQML.tabQML[0]
                 anchors.verticalCenterOffset: -1
                 anchors.horizontalCenterOffset: 0
                 anchors.horizontalCenter: parent.horizontalCenter
@@ -70,18 +70,11 @@ Window {
                 verticalAlignment: Text.AlignVCenter
                 horizontalAlignment: Text.AlignHCenter
                 font.pixelSize: 26
-                Keys.onPressed: {
-                    switch (event.key) {
-                    case Qt.Key_Up:
-                        vueObjetCpt.increment();
-                        break;
-                    case Qt.Key_Down:
-                        vueObjetCpt.decrement();
-                        break;
-                    }
+
+
                 }
             }
-        }
+
 
         Rectangle {
             id: rectangle2
@@ -89,7 +82,7 @@ Window {
             y: 24
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[1])
+            color: grilleQML.colorChoice(grilleQML.tabQML[1])
             radius: 3
             anchors.horizontalCenterOffset: -38
             anchors.verticalCenterOffset: -114
@@ -103,7 +96,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[1]
+                text: grilleQML.tabQML[1]
                 anchors.horizontalCenterOffset: 0
                 font.weight: Font.Black
                 horizontalAlignment: Text.AlignHCenter
@@ -123,7 +116,7 @@ Window {
             y: 16
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[2])
+            color: grilleQML.colorChoice(grilleQML.tabQML[2])
             radius: 3
             anchors.horizontalCenterOffset: 38
             anchors.verticalCenterOffset: -114
@@ -137,7 +130,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[2]
+                text: grilleQML.tabQML[2]
                 anchors.horizontalCenterOffset: 0
                 horizontalAlignment: Text.AlignHCenter
                 font.weight: Font.Black
@@ -157,7 +150,7 @@ Window {
             y: 17
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[3])
+            color: grilleQML.colorChoice(grilleQML.tabQML[3])
             radius: 3
             anchors.horizontalCenterOffset: 114
             anchors.verticalCenterOffset: -114
@@ -171,7 +164,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[3]
+                text: grilleQML.tabQML[3]
                 anchors.horizontalCenterOffset: 0
                 font.weight: Font.Black
                 horizontalAlignment: Text.AlignHCenter
@@ -191,7 +184,7 @@ Window {
             y: 21
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[4])
+            color: grilleQML.colorChoice(grilleQML.tabQML[4])
             radius: 3
             anchors.horizontalCenterOffset: -114
             anchors.verticalCenterOffset: -38
@@ -205,7 +198,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[4]
+                text: grilleQML.tabQML[4]
                 anchors.horizontalCenterOffset: 0
                 font.weight: Font.Black
                 horizontalAlignment: Text.AlignHCenter
@@ -225,7 +218,7 @@ Window {
             y: 25
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[5])
+            color: grilleQML.colorChoice(grilleQML.tabQML[5])
             radius: 3
             anchors.horizontalCenterOffset: -39
             anchors.verticalCenterOffset: -38
@@ -239,7 +232,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[5]
+                text: grilleQML.tabQML[5]
                 anchors.horizontalCenterOffset: -1
                 horizontalAlignment: Text.AlignHCenter
                 font.weight: Font.Black
@@ -259,7 +252,7 @@ Window {
             y: 17
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[6])
+            color: grilleQML.colorChoice(grilleQML.tabQML[6])
             radius: 3
             anchors.horizontalCenterOffset: 38
             anchors.verticalCenterOffset: -38
@@ -273,7 +266,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[6]
+                text: grilleQML.tabQML[6]
                 anchors.horizontalCenterOffset: 0
                 font.weight: Font.Black
                 horizontalAlignment: Text.AlignHCenter
@@ -293,7 +286,7 @@ Window {
             y: 18
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[7])
+            color: grilleQML.colorChoice(grilleQML.tabQML[7])
             radius: 3
             anchors.horizontalCenterOffset: 114
             anchors.verticalCenterOffset: -38
@@ -307,7 +300,7 @@ Window {
                 y: -2
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[7]
+                text: grilleQML.tabQML[7]
                 anchors.horizontalCenterOffset: 0
                 horizontalAlignment: Text.AlignHCenter
                 font.weight: Font.Black
@@ -327,7 +320,7 @@ Window {
             y: 21
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[8])
+            color: grilleQML.colorChoice(grilleQML.tabQML[8])
             radius: 3
             anchors.horizontalCenterOffset: -114
             anchors.verticalCenterOffset: 38
@@ -341,7 +334,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[8]
+                text: grilleQML.tabQML[8]
                 anchors.horizontalCenterOffset: 0
                 horizontalAlignment: Text.AlignHCenter
                 font.weight: Font.Black
@@ -361,7 +354,7 @@ Window {
             y: 25
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[9])
+            color: grilleQML.colorChoice(grilleQML.tabQML[9])
             radius: 3
             anchors.horizontalCenterOffset: -38
             anchors.verticalCenterOffset: 39
@@ -375,7 +368,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[9]
+                text: grilleQML.tabQML[9]
                 anchors.horizontalCenterOffset: 0
                 font.weight: Font.Black
                 horizontalAlignment: Text.AlignHCenter
@@ -395,7 +388,7 @@ Window {
             y: 17
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[10])
+            color: grilleQML.colorChoice(grilleQML.tabQML[10])
             radius: 3
             anchors.horizontalCenterOffset: 38
             anchors.verticalCenterOffset: 39
@@ -409,7 +402,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[10]
+                text: grilleQML.tabQML[10]
                 anchors.horizontalCenterOffset: 0
                 horizontalAlignment: Text.AlignHCenter
                 font.weight: Font.Black
@@ -429,7 +422,7 @@ Window {
             y: 18
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[11])
+            color: grilleQML.colorChoice(grilleQML.tabQML[11])
             radius: 3
             anchors.horizontalCenterOffset: 114
             anchors.verticalCenterOffset: 39
@@ -443,7 +436,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[11]
+                text: grilleQML.tabQML[11]
                 anchors.horizontalCenterOffset: 0
                 font.weight: Font.Black
                 horizontalAlignment: Text.AlignHCenter
@@ -463,7 +456,7 @@ Window {
             y: 28
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[12])
+            color: grilleQML.colorChoice(grilleQML.tabQML[12])
             radius: 3
             anchors.horizontalCenterOffset: -114
             anchors.verticalCenterOffset: 114
@@ -477,7 +470,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[12]
+                text: grilleQML.tabQML[12]
                 anchors.horizontalCenterOffset: 0
                 font.weight: Font.Black
                 horizontalAlignment: Text.AlignHCenter
@@ -497,7 +490,7 @@ Window {
             y: 32
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[13])
+            color: grilleQML.colorChoice(grilleQML.tabQML[13])
             radius: 3
             anchors.horizontalCenterOffset: -38
             anchors.verticalCenterOffset: 115
@@ -511,7 +504,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[13]
+                text: grilleQML.tabQML[13]
                 anchors.horizontalCenterOffset: 0
                 horizontalAlignment: Text.AlignHCenter
                 font.weight: Font.Black
@@ -531,7 +524,7 @@ Window {
             y: 24
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[14])
+            color: grilleQML.colorChoice(grilleQML.tabQML[14])
             radius: 3
             anchors.horizontalCenterOffset: 38
             anchors.verticalCenterOffset: 115
@@ -545,7 +538,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[14]
+                text: grilleQML.tabQML[14]
                 anchors.horizontalCenterOffset: 0
                 font.weight: Font.Black
                 horizontalAlignment: Text.AlignHCenter
@@ -565,7 +558,7 @@ Window {
             y: 25
             width: 70
             height: 70
-            color: grilleQML.colorChoice(grilleQML.casesQML[15])
+            color: grilleQML.colorChoice(grilleQML.tabQML[15])
             radius: 3
             anchors.horizontalCenterOffset: 114
             anchors.verticalCenterOffset: 115
@@ -579,7 +572,7 @@ Window {
                 y: 0
                 width: 70
                 height: 70
-                text: grilleQML.casesQML[15]
+                text: grilleQML.tabQML[15]
                 anchors.horizontalCenterOffset: 0
                 horizontalAlignment: Text.AlignHCenter
                 font.weight: Font.Black
@@ -792,6 +785,6 @@ Designer {
 D{i:11;invisible:true}D{i:13;invisible:true}D{i:15;invisible:true}D{i:17;invisible:true}
 D{i:19;invisible:true}D{i:21;invisible:true}D{i:23;invisible:true}D{i:25;invisible:true}
 D{i:27;invisible:true}D{i:29;invisible:true}D{i:31;invisible:true}D{i:33;invisible:true}
-D{i:35;invisible:true}D{i:37;invisible:true}D{i:39;invisible:true}
+D{i:35;invisible:true}D{i:39;invisible:true}D{i:37;invisible:true}
 }
 ##^##*/
