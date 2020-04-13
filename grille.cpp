@@ -441,22 +441,6 @@ QString grid::colorChoice(QString a, int b)
         else if(a=="1024") return("#FF5E4D");
         else if(a=="2048") return("#FF0000");
         else if(a=="4096") return("#E0115F");
-        else return("#cdc1b4");
-    }
-    else if(b==2)
-    {
-        if(a=="2") return("#e6d8d3");
-        else if(a=="4") return("#f0deca");
-        else if(a=="8") return("#f2b179");
-        else if(a=="16") return("#f79266");
-        else if(a=="32") return("#f97a62");
-        else if(a=="64") return("#fa5c3f");
-        else if(a=="128") return("#f55c3f");
-        else if(a=="256") return("#efca64");
-        else if(a=="512") return("#e3bb51");
-        else if(a=="1024") return("#e4b93f");
-        else if(a=="2048") return("#eec032");
-        else if(a=="4096") return("#f1646e");
         else if(a=="8192") return("#ef4c5c");
         else if(a=="16384") return("#e34239");
         else if(a=="32768") return("#72b2d6");
@@ -464,21 +448,42 @@ QString grid::colorChoice(QString a, int b)
         else if(a=="131072") return("#0374b4");
         else return("#cdc1b4");
     }
+    else if(b==2)
+    {
+        if(a=="2") return("#00FF00");
+        else if(a=="4") return("#79F8F8");
+        else if(a=="8") return("#18391E");
+        else if(a=="16") return("#7BA05B");
+        else if(a=="32") return("#83A697");
+        else if(a=="64") return("#80D0D0");
+        else if(a=="128") return("#649B88");
+        else if(a=="256") return("#1B4F08");
+        else if(a=="512") return("#87E990");
+        else if(a=="1024") return("#94812B");
+        else if(a=="2048") return("#16B84E");
+        else if(a=="4096") return("#25FDE9");
+        else if(a=="8192") return("#7FDD4C");
+        else if(a=="16384") return("#9EFD38");
+        else if(a=="32768") return("#72b2d6");
+        else if(a=="65536") return("#5f9ee2");
+        else if(a=="131072") return("#0374b4");
+        else return("#cdc1b4");
+    }
     else if(b==3)
     {
-        if(a=="2") return("#e6d8d3");
-        else if(a=="4") return("#f0deca");
-        else if(a=="8") return("#f2b179");
-        else if(a=="16") return("#f79266");
-        else if(a=="32") return("#f97a62");
-        else if(a=="64") return("#fa5c3f");
-        else if(a=="128") return("#f55c3f");
-        else if(a=="256") return("#efca64");
-        else if(a=="512") return("#e3bb51");
-        else if(a=="1024") return("#e4b93f");
-        else if(a=="2048") return("#eec032");
-        else if(a=="4096") return("#f1646e");
-        else if(a=="8192") return("#ef4c5c");
+        if(a=="2") return("#FFFF00");
+        else if(a=="4") return("#F0C300");
+        else if(a=="8") return("#FFCB60");
+        else if(a=="16") return("#F0E36B");
+        else if(a=="32") return("#AD4F09");
+        else if(a=="64") return("#CDCD0D");
+        else if(a=="128") return("#EF9B0F");
+        else if(a=="256") return("#808000");
+        else if(a=="512") return("#808000");
+        else if(a=="1024") return("#F4C430");
+        else if(a=="2048") return("#E7A854");
+        else if(a=="4096") return("#C7CF00");
+        else if(a=="8192") return("#DFFF00");
         else if(a=="16384") return("#e34239");
         else if(a=="32768") return("#72b2d6");
         else if(a=="65536") return("#5f9ee2");
@@ -487,19 +492,19 @@ QString grid::colorChoice(QString a, int b)
     }
     else if(b==4)
     {
-        if(a=="2") return("#e6d8d3");
-        else if(a=="4") return("#f0deca");
-        else if(a=="8") return("#f2b179");
-        else if(a=="16") return("#f79266");
-        else if(a=="32") return("#f97a62");
-        else if(a=="64") return("#fa5c3f");
-        else if(a=="128") return("#f55c3f");
-        else if(a=="256") return("#efca64");
-        else if(a=="512") return("#e3bb51");
-        else if(a=="1024") return("#e4b93f");
-        else if(a=="2048") return("#eec032");
-        else if(a=="4096") return("#f1646e");
-        else if(a=="8192") return("#ef4c5c");
+        if(a=="2") return("#0000FF");
+        else if(a=="4") return("#79F8F8");
+        else if(a=="8") return("#007FFF");
+        else if(a=="16") return("#1E7FCB");
+        else if(a=="32") return("#74D0F1");
+        else if(a=="64") return("#A9EAFE");
+        else if(a=="128") return("#22427C");
+        else if(a=="256") return("#003366");
+        else if(a=="512") return("#6050DC");
+        else if(a=="1024") return("#03224C");
+        else if(a=="2048") return("#DFF2FF");
+        else if(a=="4096") return("#6600FF");
+        else if(a=="8192") return("#2BFAFA");
         else if(a=="16384") return("#e34239");
         else if(a=="32768") return("#72b2d6");
         else if(a=="65536") return("#5f9ee2");
@@ -508,18 +513,18 @@ QString grid::colorChoice(QString a, int b)
     }
     else if(b==5)
     {
-        if(a=="2") return("#e6d8d3");
-        else if(a=="4") return("#f0deca");
-        else if(a=="8") return("#f2b179");
-        else if(a=="16") return("#f79266");
-        else if(a=="32") return("#f97a62");
-        else if(a=="64") return("#fa5c3f");
-        else if(a=="128") return("#f55c3f");
-        else if(a=="256") return("#efca64");
-        else if(a=="512") return("#e3bb51");
-        else if(a=="1024") return("#e4b93f");
-        else if(a=="2048") return("#eec032");
-        else if(a=="4096") return("#f1646e");
+        if(a=="2") return("#660099");
+        else if(a=="4") return("#884DA7");
+        else if(a=="8") return("#F9429E");
+        else if(a=="16") return("#6600FF");
+        else if(a=="32") return("#BD33A4");
+        else if(a=="64") return("#DE3163");
+        else if(a=="128") return("#6A455D");
+        else if(a=="256") return("#C9A0DC");
+        else if(a=="512") return("#D2CAEC");
+        else if(a=="1024") return("#AC1E44");
+        else if(a=="2048") return("#FD3F92");
+        else if(a=="4096") return("#9E0E40");
         else if(a=="8192") return("#ef4c5c");
         else if(a=="16384") return("#e34239");
         else if(a=="32768") return("#72b2d6");
