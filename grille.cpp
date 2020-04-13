@@ -33,6 +33,17 @@ void grid::resetTab()
     }
 }
 
+QList<QString> grid::getTab()
+{
+    QList<QString> tabValuesStr;
+    for(int k=0; k<=15; k++)
+    {
+        if(tab[k]!=0) tabValuesStr.append(QString::number(tab[k]));
+        else if(tab[k]==0) tabValuesStr.append(QString::fromStdString(" "));
+    }
+    return tabValuesStr;
+}
+
 void grid::resetGame()
 {
     resetTab();
@@ -163,10 +174,7 @@ void grid::mergeUp()
                 i++;
                 i++;
             }
-            else
-            {
-                i++;
-            }
+            else i++;
         }
     }
 }
@@ -188,7 +196,7 @@ void grid::slideDown()
         {
             iMinFree--;
         }
-        int i=3;
+        int i=2;
         while(i>=0)
         {
             if((tab[4*i+j]!=0)&&(iMinFree>i))
@@ -217,10 +225,7 @@ void grid::mergeDown()
                 i--;
                 i--;
             }
-            else
-            {
-                i--;
-            }
+            else i--;
         }
     }
 }
@@ -271,10 +276,7 @@ void grid::mergeLeft()
                 j++;
                 j++;
             }
-            else
-            {
-                j++;
-            }
+            else j++;
         }
     }
 }
@@ -296,7 +298,7 @@ void grid::slideRight()
         {
             jMinFree--;
         }
-        int j=3;
+        int j=2;
         while(j>=0)
         {
             if((tab[4*i+j]!=0)&&(jMinFree>j))
@@ -305,7 +307,7 @@ void grid::slideRight()
                 tab[4*i+j]=0;
                 jMinFree--;
             }
-            j++;
+            j--;
         }
     }
 }
@@ -325,10 +327,7 @@ void grid::mergeRight()
                 j--;
                 j--;
             }
-            else
-            {
-                j++;
-            }
+            else j--;
         }
     }
 }

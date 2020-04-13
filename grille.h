@@ -15,6 +15,7 @@ public:
     explicit grid(QObject *parent = nullptr);    
     void setTab(int pos, int val);
     void resetTab();
+    QList<QString> getTab();
     Q_INVOKABLE void resetGame();
     void generateNewTile();
     int generateRandom(int n);
@@ -39,18 +40,22 @@ public:
     QString colorChoice(QString a);
     bool testBlocked(int x, int y);
     void testGameOver();
+    
 /*
-    Q_PROPERTY(int scoreQML READ getScore WRITE changeScore NOTIFY scoreChanged);
-    Q_PROPERTY(int bestScoreQML READ getRecord NOTIFY bestScoreChanged);
-    Q_PROPERTY(bool gameOverQML READ readGameOver NOTIFY gameOverChanged);
-    Q_PROPERTY(QList<QString> tabQML READ getTab NOTIFY casesChanged);
+    void printTab();
+*/
+/*
+    Q_PROPERTY(int scoreQML READ getScore WRITE setScore NOTIFY scoreUpdated);
+    Q_PROPERTY(int recordQML READ getRecord NOTIFY recordUpdated);
+    Q_PROPERTY(bool gameOverQML READ getGameOver NOTIFY gameOverUpdated);
+    Q_PROPERTY(QList<QString> tabQML READ getTab NOTIFY tabUpdated);
 */
 
 signals:
-    void scoreChanged();
-    void RecordChanged();
-    void gameOverChanged();
-    void casesChanged();
+    void tabUpdated();
+    void scoreUpdated();
+    void recordUpdated();
+    void gameOverUpdated();
 
 private:
     int score;
